@@ -5,72 +5,72 @@
   Cry More xj3t_
   you cant even make optimization
 ]]
- 
+
 -- local HWIDTable = loadstring(game:HttpGet("https://raw.githubusercontent.com/CrismonPetrasion/HWID/main/Checker.lua"))()
 local HWID = game:GetService("RbxAnalyticsService"):GetClientId()
- 
+
 --// Services
- 
+
 local RunService = game:GetService("RunService")
 local UserInputService = game:GetService("UserInputService")
 local Players = game:GetService("Players")
 local Lighting = game:GetService("Lighting")
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
- 
+
 --// Variables
- 
+
 local Camera = workspace.CurrentCamera
 local Weapons = ReplicatedStorage.Weapons
 local Debris = workspace.Debris
 local RayIgnore = workspace.Ray_Ignore
 local LocalPlayer = Players.LocalPlayer
- 
+
 local CurrentCamera = Camera
 local WorldToViewportPoint = CurrentCamera.WorldToViewportPoint
- 
+
 --// Aimbot Settings
- 
+
 local FOVring = Drawing.new("Circle")
 FOVring.Visible = false
 FOVring.Thickness = 1.5
 FOVring.Radius = 150
 FOVring.Transparency = 1
 FOVring.Color = Color3.fromRGB(200, 200, 200)
- 
+
 local AimSettings = {
     Enabled = false,
     TeamCheck = false,
     Smoothing = 1,
     EnableFOV = false
 }
- 
+
 local ESPSettings = {
     Enabled = false,
     UseTeamColor = false,
     ChamsColor = Color3.fromRGB(200,200,200)
 }
- 
+
 local Sounds = {
     KillSoundEnabled = false,
     HitSoundEnabled = false,
     KillSound = nil,
     HitSound = nil,
 }
- 
+
 --// Library
- 
+
 local Library = loadstring(game:HttpGet('https://sirius.menu/rayfield'))()
- 
+
 --// Window
- 
+
 local Window = Library:CreateWindow({
     Name = "Galaxy.Skid :3",
     LoadingTitle = "Loading Script",
-    LoadingSubtitle = "By XSethX",
+    LoadingSubtitle = "By Fizz",
     ConfigurationSaving = {
         Enabled = false,
         FolderName = "CounterBlox", -- Create a custom folder for your hub/game
-        FileName = "XSethXCounterBlox"
+        FileName = "FizzCounterBlox"
     },
     Discord = {
         Enabled = false,
@@ -81,33 +81,33 @@ local Window = Library:CreateWindow({
     KeySettings = {
         Title = "Key System",
         Subtitle = "Discord System",
-        Note = "discord.gg/XQzu4SqbRD",
+        Note = "discord.gg/vZQTkyCXD8",
         FileName = "Key", -- It is recommended to use something unique as other scripts using Rayfield may overwrite your key file
         SaveKey = true, -- The user's key will be saved, but if you change the key, they will be unable to use your script
         GrabKeyFromSite = false, -- If this is true, set Key below to the RAW site you would like Rayfield to get the key from
         Key = {"GalaxyHubIsBestSkiddersEver"} -- List of keys that will be accepted by the system, can be RAW file links (pastebin, github etc) or simple strings ("hello","key22")
     }
 })
- 
+
 local Home = Window:CreateTab("Home", 4483362458) -- Title, Image
 local Combat = Window:CreateTab("Combat", 4483362458) -- Title, Image
 local Misc = Window:CreateTab("Misc", 4483362458) -- Title, Image
 local Visuals = Window:CreateTab("Visuals", 4483362458) -- Title, Image
 local World = Window:CreateTab("World", 4483362458) -- Title, Image
- 
+
 --// Version
- 
+
 local Version = "1.0"
- 
+
 --// Game
- 
+
 if true then
     function GetClosestPlayer(CFrame)
         local Ray = Ray.new(CFrame.Position, CFrame.LookVector).Unit
- 
+    
         local Target = nil
         local Mag = math.huge
- 
+    
         for _, v in pairs(Players:GetPlayers()) do
             if v.Character and v.Character:FindFirstChild("Humanoid").Health > 0 and v.Character:FindFirstChild("Humanoid") and v.Character:FindFirstChild("HumanoidRootPart") and v ~= LocalPlayer and (v.Team ~= LocalPlayer.Team or (not AimSettings.TeamCheck)) then
                 local Position = v.Character.Head.Position
@@ -118,20 +118,20 @@ if true then
                 end
             end
         end
- 
+    
         return Target
     end
- 
+
     do
         --// Home
- 
+
         Home:CreateLabel("Premium Version")
         Home:CreateLabel("Version: ".. Version)
     end
- 
+
     do
         --// Combat
- 
+
         Combat:CreateSection("Aimbot")
         Combat:CreateToggle({
             Name = "Aimbot",
@@ -141,7 +141,7 @@ if true then
                 AimSettings.Enabled = true
             end,
         })
- 
+
         Combat:CreateSection("Settings")
         Combat:CreateSlider({
             Name = "FOV Radius",
@@ -153,7 +153,7 @@ if true then
                 FOVring.Radius = Value
             end,
         })
- 
+
         Combat:CreateColorPicker({
             Name = "FOV Color",
             Color = Color3.fromRGB(200,200,200),
@@ -162,7 +162,7 @@ if true then
                 FOVring.Color = Value or Color3.fromRGB(200,200,200)
             end
         })
- 
+
         Combat:CreateToggle({
             Name = "Use FOV",
             CurrentValue = false,
@@ -171,7 +171,7 @@ if true then
                 AimSettings.EnableFOV = Value
             end,
         })
- 
+
         Combat:CreateToggle({
             Name = "Team Check",
             CurrentValue = false,
@@ -180,7 +180,7 @@ if true then
                 AimSettings.TeamCheck = Value
             end,
         })
- 
+
         Combat:CreateSection("Character")
         Combat:CreateToggle({
             Name = "Spinbot",
@@ -190,7 +190,7 @@ if true then
                 _G.SpinBot = Value
             end,
         })
- 
+
         Combat:CreateSection("Settings")
         Combat:CreateSlider({
             Name = "Speed",
@@ -203,10 +203,10 @@ if true then
             end,
         })
     end
- 
+
     do
         --// Misc
- 
+
         Misc:CreateSection("Guns")
         Misc:CreateButton({
             Name = "No Fire Rate",
@@ -218,7 +218,7 @@ if true then
                 end
             end,
         })
- 
+    
         Misc:CreateButton({
             Name = "No Spread",
             Callback = function()
@@ -232,7 +232,7 @@ if true then
                 end
             end,
         })
- 
+
         Misc:CreateButton({
             Name = "Instant Reload Time",
             Callback = function()
@@ -243,7 +243,7 @@ if true then
                 end
             end,
         })
- 
+
         Misc:CreateButton({
             Name = "Instant Equip Time",
             Callback = function()
@@ -254,7 +254,7 @@ if true then
                 end
             end,
         })
- 
+    
         Misc:CreateButton({
             Name = "Infinite Ammo",
             Callback = function()
@@ -266,7 +266,7 @@ if true then
                 end
             end,
         })
- 
+
         Misc:CreateSection("Sounds")
         Misc:CreateToggle({
             Name = "Hit Sound",
@@ -276,7 +276,7 @@ if true then
                 Sounds.HitSoundEnabled = Value
             end,
         })
- 
+
         Misc:CreateToggle({
             Name = "Kill Sound",
             CurrentValue = false,
@@ -285,7 +285,7 @@ if true then
                 Sounds.KillSoundEnabled = Value
             end,
         })
- 
+
         Misc:CreateDropdown({
             Name = "Hit Sounds",
             Options = {'Bameware', 'Bell', 'Bubble', 'Pick', 'Pop', 'Rust', 'Skeet', 'Neverlose', 'Minecraft'},
@@ -316,7 +316,7 @@ if true then
                 print(Sounds.HitSound)
             end,
         })
- 
+
         Misc:CreateDropdown({
             Name = "Kill Sounds",
             Options = {'Bameware', 'Bell', 'Bubble', 'Pick', 'Pop', 'Rust', 'Skeet', 'Neverlose', 'Minecraft'},
@@ -347,7 +347,7 @@ if true then
                 print(Sounds.KillSound)
             end,
         })
- 
+
         Misc:CreateSection("Effects")
         Misc:CreateToggle({
             Name = "Remove Scope",
@@ -357,7 +357,7 @@ if true then
                 _G.RemoveScope = Value
             end,
         })
- 
+
         Misc:CreateToggle({
             Name = "Remove Flash",
             CurrentValue = false,
@@ -366,7 +366,7 @@ if true then
                 _G.RemoveFlash = Value
             end,
         })
- 
+
         Misc:CreateToggle({
             Name = "Remove Smoke",
             CurrentValue = false,
@@ -375,7 +375,7 @@ if true then
                 _G.RemoveSmoke = Value
             end,
         })
- 
+
         Misc:CreateToggle({
             Name = "Remove Blood",
             CurrentValue = false,
@@ -384,7 +384,7 @@ if true then
                 _G.RemoveBlood = Value
             end,
         })
- 
+
         Misc:CreateToggle({
             Name = "Remove Bullets Holes",
             CurrentValue = false,
@@ -393,7 +393,7 @@ if true then
                 _G.RemoveBulletsHoles = Value
             end,
         })
- 
+
         Misc:CreateSection("Movement")
         Misc:CreateToggle({
             Name = "Auto Bhop",
@@ -403,7 +403,7 @@ if true then
                 _G.Bhop = Value
             end,
         })
- 
+
         Misc:CreateSlider({
             Name = "Bhop Speed",
             Range = {0, 300},
@@ -414,7 +414,7 @@ if true then
                 _G.BhopSpeed = Value
             end,
         })
- 
+
         Misc:CreateSection("Character")
         Misc:CreateToggle({
             Name = "Fly",
@@ -424,7 +424,7 @@ if true then
                 _G.Fly = Value
             end,
         })
- 
+    
         Misc:CreateToggle({
             Name = "Noclip",
             CurrentValue = false,
@@ -433,7 +433,7 @@ if true then
                 _G.Noclip = Value
             end,
         })
- 
+        
         Misc:CreateSlider({
             Name = "Fly Speed",
             Range = {0, 120},
@@ -444,7 +444,7 @@ if true then
                 _G.FlySpeed = Value
             end,
         })
- 
+
         Misc:CreateSection("Stuff")
         Misc:CreateButton({
             Name = "Infinite Cash",
@@ -458,10 +458,10 @@ if true then
             end,
         })
     end
- 
+
     do
         --// Visuals
- 
+
         Visuals:CreateSection("Camera")
         Visuals:CreateSlider({
             Name = "Field Of View",
@@ -473,7 +473,7 @@ if true then
                 _G.FieldOfView = Value
             end,
         })
- 
+
         Visuals:CreateSection("Character")
         Visuals:CreateToggle({
             Name = "Third Person",
@@ -483,7 +483,7 @@ if true then
                 _G.ThirdPerson = Value
             end,
         })
- 
+
         Visuals:CreateSlider({
             Name = "Third Person Distance",
             Range = {0, 50},
@@ -494,7 +494,7 @@ if true then
                 _G.ThirdPersonDistance = Value
             end,
         })
- 
+
         Visuals:CreateSection("Players")
         Visuals:CreateToggle({
             Name = "Chams",
@@ -504,7 +504,7 @@ if true then
                 ESPSettings.Enabled = Value
             end,
         })
- 
+
         Visuals:CreateToggle({
             Name = "Use Team Color",
             CurrentValue = false,
@@ -513,7 +513,7 @@ if true then
                 ESPSettings.UseTeamColor = Value
             end,
         })
- 
+
         Visuals:CreateColorPicker({
             Name = "Chams Color",
             Color = Color3.fromRGB(200,200,200),
@@ -522,7 +522,7 @@ if true then
                 ESPSettings.ChamsColor = Value
             end
         })
- 
+
         Visuals:CreateSection("Arms")
         Visuals:CreateToggle({
             Name = "Arms Chams",
@@ -532,7 +532,7 @@ if true then
                 _G.ArmsChams = Value
             end,
         })
- 
+
         Visuals:CreateSection("Guns")
         Visuals:CreateToggle({
             Name = "Guns Chams",
@@ -542,7 +542,7 @@ if true then
                 _G.GunsChams = Value
             end,
         })
- 
+
         Visuals:CreateColorPicker({
             Name = "Guns Chams Color",
             Color = Color3.fromRGB(200,200,200),
@@ -552,9 +552,9 @@ if true then
             end
         })
     end
- 
+
 end
- 
+
 LocalPlayer.Additionals.TotalDamage.Changed:Connect(function(Value)
     if Sounds.HitSoundEnabled == true and Value ~= 0 then
         local HitSound = Instance.new("Sound")
@@ -564,7 +564,7 @@ LocalPlayer.Additionals.TotalDamage.Changed:Connect(function(Value)
 		HitSound:Play()
     end
 end)
- 
+
 LocalPlayer.Status.Kills.Changed:Connect(function(Value)
     if Sounds.KillSoundEnabled == true and Value ~= 0 then
         local KillSound = Instance.new("Sound")
@@ -574,7 +574,7 @@ LocalPlayer.Status.Kills.Changed:Connect(function(Value)
 		KillSound:Play()
     end
 end)
- 
+
 RunService.RenderStepped:Connect(function()
     if _G.RemoveScope == true then
         LocalPlayer.PlayerGui.GUI.Crosshairs.Scope.ImageTransparency = 1
@@ -601,7 +601,7 @@ RunService.RenderStepped:Connect(function()
     end
     task.wait()
 end)
- 
+
 RunService.RenderStepped:Connect(function()
     if _G.RemoveFlash == true then
         LocalPlayer.PlayerGui.Blnd.Enabled = false
@@ -610,7 +610,7 @@ RunService.RenderStepped:Connect(function()
     end
     task.wait()
 end)
- 
+
 RunService.RenderStepped:Connect(function()
     if _G.RemoveBulletsHoles == true then
         for i,v in pairs(Debris:GetChildren()) do
@@ -621,7 +621,7 @@ RunService.RenderStepped:Connect(function()
     end
     task.wait()
 end)
- 
+
 RunService.RenderStepped:Connect(function()
     if _G.RemoveSmoke == true then
         for i,v in pairs(RayIgnore.Smokes:GetChildren()) do
@@ -642,7 +642,7 @@ RunService.RenderStepped:Connect(function()
     end
     task.wait()
 end)
- 
+
 RunService.RenderStepped:Connect(function()
     if _G.Noclip == true then
         for _, Instance in pairs(LocalPlayer.Character:GetChildren()) do
@@ -659,13 +659,13 @@ RunService.RenderStepped:Connect(function()
     end
     task.wait()
 end)
- 
+
 RunService.RenderStepped:Connect(function()
     if _G.Fly == true then
         if LocalPlayer.Character ~= nil then
             local Speed = _G.FlySpeed or 16
             local Velocity = Vector3.new(0, 1, 0)
- 
+    
             if UserInputService:IsKeyDown(Enum.KeyCode.W) then
                 Velocity = Velocity + (Camera.CoordinateFrame.lookVector * Speed)
             end
@@ -678,14 +678,14 @@ RunService.RenderStepped:Connect(function()
             if UserInputService:IsKeyDown(Enum.KeyCode.D) then
                 Velocity = Velocity + (Camera.CoordinateFrame.rightVector * Speed)
             end
- 
+    
             LocalPlayer.Character.HumanoidRootPart.Velocity = Velocity
             LocalPlayer.Character.Humanoid.PlatformStand = true
         end
     end
     task.wait()
 end)
- 
+
 RunService.RenderStepped:Connect(function()
     if _G.Bhop == true then
         if LocalPlayer.Character ~= nil and UserInputService:IsKeyDown(Enum.KeyCode.Space) and LocalPlayer.PlayerGui.GUI.Main.GlobalChat.Visible == false then
@@ -693,7 +693,7 @@ RunService.RenderStepped:Connect(function()
             local Speed = _G.BhopSpeed or 100
             local Dir = Camera.CFrame.LookVector * Vector3.new(1,0,1)
             local Move = Vector3.new()
- 
+
             Move = UserInputService:IsKeyDown(Enum.KeyCode.W) and Move + Dir or Move
             Move = UserInputService:IsKeyDown(Enum.KeyCode.S) and Move - Dir or Move
             Move = UserInputService:IsKeyDown(Enum.KeyCode.D) and Move + Vector3.new(-Dir.Z,0,Dir.X) or Move
@@ -706,7 +706,7 @@ RunService.RenderStepped:Connect(function()
     end
     task.wait()
 end)
- 
+
 RunService.RenderStepped:Connect(function()
     if AimSettings.Enabled == true then            
         local Pressed = UserInputService:IsMouseButtonPressed(Enum.UserInputType.MouseButton2)
@@ -721,7 +721,7 @@ RunService.RenderStepped:Connect(function()
             end
         end
     end
- 
+
     if AimSettings.EnableFOV then
         FOVring.Visible = true
         FOVring.Position = workspace.CurrentCamera.ViewportSize/2
@@ -730,8 +730,8 @@ RunService.RenderStepped:Connect(function()
     end
     task.wait()
 end)
- 
- 
+
+
 RunService.RenderStepped:Connect(function()
     if LocalPlayer.Character ~= nil and LocalPlayer.Character.Humanoid.Health > 0 then
         if _G.SpinBot then
@@ -743,7 +743,7 @@ RunService.RenderStepped:Connect(function()
     end
     task.wait()
 end)
- 
+
 RunService.RenderStepped:Connect(function()
     if _G.ThirdPerson == true then
         if LocalPlayer.CameraMinZoomDistance ~= _G.ThirdPersonDistance or 10 then
@@ -760,13 +760,13 @@ RunService.RenderStepped:Connect(function()
     end
     task.wait()
 end)
- 
+
 RunService.RenderStepped:Connect(function()
     Camera.FieldOfView = _G.FieldOfView or 80
     task.wait()
 end)
- 
- 
+
+
 RunService.RenderStepped:Connect(function()
     if _G.GunsChams == true then
         for _, Stuff in ipairs(workspace.Camera:GetChildren()) do
@@ -793,7 +793,7 @@ RunService.RenderStepped:Connect(function()
     end
     task.wait()
 end)
- 
+
 RunService.RenderStepped:Connect(function()
     if _G.ArmsChams == true then
         for _, Stuff in ipairs(workspace.Camera:GetChildren()) do
@@ -836,7 +836,7 @@ RunService.RenderStepped:Connect(function()
     end
     task.wait()
 end)
- 
+
 RunService.RenderStepped:Connect(function()
     for _, Player in ipairs(Players:GetChildren()) do
         if ESPSettings.Enabled == true then
